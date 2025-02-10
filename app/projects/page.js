@@ -1,112 +1,51 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Projects() {
-  const [projects, setProjects] = useState([]);
-  const [newProject, setNewProject] = useState({ title: "", description: "", videoUrl: "" });
+  const [media, setMedia] = useState([]);
 
-  // 初回読み込み時に localStorage からデータを取得
-  useEffect(() => {
-    const savedProjects = JSON.parse(localStorage.getItem("projects")) || [];
-    setProjects(savedProjects);
-  }, []);
-
-  // プロジェクトを追加
-  const addProject = () => {
-    const updatedProjects = [...projects, newProject];
-    setProjects(updatedProjects);
-    localStorage.setItem("projects", JSON.stringify(updatedProjects));
-    setNewProject({ title: "", description: "", videoUrl: "" });
-  };
-
-  // プロジェクトを削除
-  const deleteProject = (index) => {
-    const updatedProjects = projects.filter((_, i) => i !== index);
-    setProjects(updatedProjects);
-    localStorage.setItem("projects", JSON.stringify(updatedProjects));
+  const handleUpload = (event) => {
+    const files = event.target.files;
+    const newMedia = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    setMedia([...media, ...newMedia]);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-20">
-      <h1 className="text-6xl font-extrabold text-center text-blue-400">Projects</h1>
-
-      {/* プロジェクト追加フォーム */}
-      <div className="mt-8 flex flex-col items-center">
-        <input
-          type="text"
-          placeholder="プロジェクトタイトル"
-          value={newProject.title}
-          onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
-          className="mb-4 p-3 text-xl bg-gray-900 text-white border border-gray-700 rounded-lg w-1/2"
-        />
-        <input
-          type="text"
-          placeholder="プロジェクト概要"
-          value={newProject.description}
-          onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-          className="mb-4 p-3 text-xl bg-gray-900 text-white border border-gray-700 rounded-lg w-1/2"
-        />
-        <input
-          type="text"
-          placeholder="動画URL（YouTube, Vimeo など）"
-          value={newProject.videoUrl}
-          onChange={(e) => setNewProject({ ...newProject, videoUrl: e.target.value })}
-          className="mb-4 p-3 text-xl bg-gray-900 text-white border border-gray-700 rounded-lg w-1/2"
-        />
-        <button 
-          onClick={addProject} 
-          className="mt-4 px-8 py-3 bg-blue-500 text-white text-2xl rounded-xl shadow-lg hover:bg-blue-700 transition-all flex items-center space-x-3"
-        >
-          <FaPlus /> <span>プロジェクトを追加</span>
-        </button>
-      </div>
-
-      {/* プロジェクト一覧 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
-        {projects.map((project, index) => (
-          <motion.div 
-            key={index} 
-            className="p-6 bg-gray-800 rounded-lg shadow-xl transform hover:scale-105 transition-all border border-blue-500 relative"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-          >
-            <button 
-              onClick={() => deleteProject(index)} 
-              className="absolute top-2 right-2 bg-red-500 p-2 rounded-full hover:bg-red-700"
-            >
-              <FaTrash />
-            </button>
-            <h2 className="text-3xl font-bold">{project.title}</h2>
-            <p className="mt-2 text-gray-400">{project.description}</p>
-            {project.videoUrl && (
-              <iframe 
-                src={project.videoUrl} 
-                className="mt-4 w-full h-48 rounded-lg"
-                allowFullScreen
-              ></iframe>
-            )}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-export default function Projects() {
-  return (
-    <div className="relative h-screen flex items-center justify-center text-7xl font-bold text-white">
+    <div className="relative min-h-screen flex flex-col items-center text-white">
       {/* 背景画像 */}
       <div 
         className="absolute inset-0 bg-image"
         style={{ backgroundImage: "url('/images/projects-bg.jpg')" }}
       ></div>
-      
-      {/* テキスト */}
-      <h1 className="relative z-10 bg-black bg-opacity-50 p-10 rounded-lg shadow-lg">
+
+      {/* タイトル */}
+      <h1 className="relative z-10 text-7xl font-bold mt-20 bg-black bg-opacity-50 p-5 rounded-lg shadow-lg">
         My Projects
       </h1>
+
+      {/* アップロード UI */}
+      <input
+        type="file"
+        accept="image/*,video/*"
+        multiple
+        onChange={handleUpload}
+        className="mt-10 p-3 bg-gray-800 rounded-lg shadow-lg cursor-pointer"
+      />
+
+      {/* プレビュー */}
+      <div className="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+        {media.map((src, index) => (
+          <div key={index} className="p-2 bg-black bg-opacity-50 rounded-lg">
+            {src.includes("video") ? (
+              <video src={src} controls className="w-48 h-48 object-cover" />
+            ) : (
+              <img src={src} className="w-48 h-48 object-cover rounded-lg" />
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
