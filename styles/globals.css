@@ -1,0 +1,20 @@
+/* styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: #3b82f6;
+  transition: 0.3s ease-in-out;
+}

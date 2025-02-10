@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../styles/globals.css"; // 正しいパスでインポート
 
 export default function Layout({ children }) {
   return (
