@@ -9,4 +9,20 @@ export default function About() {
       </div>
     );
   }
+  export default function About() {
+    return (
+      <div className="relative h-screen flex items-center justify-center text-7xl font-bold text-white">
+        {/* 背景画像 */}
+        <div 
+          className="absolute inset-0 bg-image"
+          style={{ backgroundImage: "url('/images/about-bg.jpg')" }}
+        ></div>
+        
+        {/* テキスト */}
+        <h1 className="relative z-10 bg-black bg-opacity-50 p-10 rounded-lg shadow-lg">
+          About Me
+        </h1>
+      </div>
+    );
+  }
   

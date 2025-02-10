@@ -1,12 +1,13 @@
 /* styles/globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 body {
   background-color: black;
   color: white;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 a {
@@ -17,4 +18,12 @@ a {
 a:hover {
   color: #3b82f6;
   transition: 0.3s ease-in-out;
+}
+
+/* 背景画像の設定 */
+.bg-image {
+  background-size: cover;  /* 画面全体にフィット */
+  background-position: center; /* 画像の中央を表示 */
+  background-repeat: no-repeat; /* 繰り返しなし */
+  background-attachment: fixed; /* スクロール時に固定 */
 }

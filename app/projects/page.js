@@ -94,3 +94,19 @@ export default function Projects() {
     </div>
   );
 }
+export default function Projects() {
+  return (
+    <div className="relative h-screen flex items-center justify-center text-7xl font-bold text-white">
+      {/* 背景画像 */}
+      <div 
+        className="absolute inset-0 bg-image"
+        style={{ backgroundImage: "url('/images/projects-bg.jpg')" }}
+      ></div>
+      
+      {/* テキスト */}
+      <h1 className="relative z-10 bg-black bg-opacity-50 p-10 rounded-lg shadow-lg">
+        My Projects
+      </h1>
+    </div>
+  );
+}
