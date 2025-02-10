@@ -1,25 +1,23 @@
+import "./globals.css";
+
 export default function Layout({ children }) {
-    return (
-      <div className="bg-gray-100 text-gray-900 min-h-screen">
-        {/* ヘッダー */}
-        <header className="fixed top-0 left-0 w-full bg-white shadow-md py-4 px-6 flex justify-between items-center">
-          <h1 className="text-xl font-bold">はたけ（furukawa）</h1>
-          <nav className="space-x-6">
-            <a href="/" className="hover:text-blue-600 transition">Home</a>
-            <a href="/projects" className="hover:text-blue-600 transition">Projects</a>
-            <a href="/about" className="hover:text-blue-600 transition">About</a>
-            <a href="/contact" className="hover:text-blue-600 transition">Contact</a>
-          </nav>
-        </header>
-  
-        {/* メインコンテンツ */}
-        <main className="pt-20">{children}</main>
-  
-        {/* フッター */}
-        <footer className="text-center py-6 text-sm text-gray-500">
-          © 2025 はたけ. All Rights Reserved.
-        </footer>
-      </div>
-    );
-  }
-  
+  return (
+    <div className="bg-black text-white min-h-screen font-['Space_Grotesk']">
+      {/* ヘッダー */}
+      <header className="fixed top-0 left-0 w-full bg-black shadow-md py-6 px-10 flex justify-center space-x-16 text-3xl font-bold tracking-wide uppercase">
+        <a href="/" className="hover:text-blue-400 transition">Home</a>
+        <a href="/projects" className="hover:text-blue-400 transition">Projects</a>
+        <a href="/about" className="hover:text-blue-400 transition">About</a>
+        <a href="/contact" className="hover:text-blue-400 transition">Contact</a>
+      </header>
+
+      {/* メインコンテンツ */}
+      <main className="pt-32 px-20">{children}</main>
+
+      {/* フッター */}
+      <footer className="text-center py-10 text-lg tracking-wide text-gray-500">
+        &copy; 2025 はたけ(furukawa). All Rights Reserved.
+      </footer>
+    </div>
+  );
+}
